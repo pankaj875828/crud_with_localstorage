@@ -1,0 +1,38 @@
+<form [formGroup]="posterForm">
+  <h2>Poster Form</h2>
+  <input type="number" name="User id" placeholder="Your User ID" required formControlName="userid">
+  <input type="text" name="title" placeholder="Your Title" required formControlName="title">
+  <input type="text" name="body" placeholder="Your Body" required formControlName="body">
+  <button type="submit" (click)="addData(button)" [disabled]="posterForm.invalid">{{button}}</button>
+</form><br><br>
+
+<div class="deleteall" (click)="deleteAll()" *ngIf = 'posterData.length>0' >Delete All</div><br>
+
+<input class="search" type="text" (keyup)="searchValue($event)" placeholder="Search by User ID...">
+
+<table *ngIf="posterData.length != 0">
+  <caption>Poster Summary</caption>
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Body</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of posterData">
+      <td data-label="ID">{{a.id}}</td>
+      <td data-label="User ID">{{a.userId}}</td>
+      <td data-label="Title">{{a.title}}</td>
+      <td data-label="Body">{{a.body}}</td>
+      <td data-label="Edit" (click)="getData(a.id)"><button class="edit">Edit</button></td>
+      <td data-label="Delete" (click)="deleteData(a.id)"><button class="delete">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 class="nodata" *ngIf="posterData.length == 0">No Data Found</h1>
+
